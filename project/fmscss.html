@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Feedback Management System</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f5f9;
+            margin: 0;
+        }
+
+        header {
+            background: #2563eb;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        .container {
+            width: 80%;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+        }
+
+        h2 {
+            color: #2563eb;
+            border-bottom: 2px solid #2563eb;
+            padding-bottom: 8px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 18px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .rating input {
+            width: auto;
+            margin: 5px;
+        }
+
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background: #2563eb;
+            color: white;
+        }
+
+        .summary {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .box {
+            background: #e8f0ff;
+            padding: 15px;
+            width: 25%;
+            border-radius: 8px;
+        }
+
+        footer {
+            text-align: center;
+            background: #2563eb;
+            color: white;
+            padding: 15px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Student Feedback Management System</h1>
+    <p>Share your valuable feedback with us</p>
+</header>
+
+<div class="container">
+
+    <h2>Student Feedback Form</h2>
+
+    <form>
+
+        <label>Student Name</label>
+        <input type="text" placeholder="Enter your name" required>
+
+        <label>Student ID</label>
+        <input type="text" placeholder="Enter student ID" required>
+
+        <label>Email</label>
+        <input type="email" placeholder="Enter email" required>
+
+        <label>Course</label>
+        <select>
+            <option>Object Oriented Programming</option>
+            <option>Operating Systems</option>
+            <option>Data Structures</option>
+            <option>Web Development</option>
+            <option>Embedded Systems</option>
+        </select>
+
+        <label>Faculty Teaching</label>
+        <input type="text" placeholder="Enter faculty name">
+
+        <label>Rate the Course</label>
+
+        <div class="rating">
+            <input type="radio" name="rating"> ⭐
+            <input type="radio" name="rating"> ⭐⭐
+            <input type="radio" name="rating"> ⭐⭐⭐
+            <input type="radio" name="rating"> ⭐⭐⭐⭐
+            <input type="radio" name="rating"> ⭐⭐⭐⭐⭐
+        </div>
+
+        <br>
+
+        <label>Feedback / Suggestions</label>
+        <textarea rows="5"
+            placeholder="Write your feedback or suggestions..."></textarea>
+
+        <button type="submit">Submit Feedback</button>
+        <button type="reset">Clear</button>
+
+    </form>
+
+    <h2>Feedback Summary</h2>
+
+    <div class="summary">
+        <div class="box">
+            <h3>150</h3>
+            <p>Total Students</p>
+        </div>
+
+        <div class="box">
+            <h3>4.5 ⭐</h3>
+            <p>Average Rating</p>
+        </div>
+
+        <div class="box">
+            <h3>120</h3>
+            <p>Positive Feedback</p>
+        </div>
+    </div>
+
+    <h2>Recent Student Feedback</h2>
+
+    <table>
+        <tr>
+            <th>Student</th>
+            <th>Course</th>
+            <th>Rating</th>
+            <th>Feedback</th>
+        </tr>
+
+        <tr>
+            <td>Rahul</td>
+            <td>Operating Systems</td>
+            <td>⭐⭐⭐⭐⭐</td>
+            <td>Excellent teaching and explanation.</td>
+        </tr>
+
+        <tr>
+            <td>Priya</td>
+            <td>Web Development</td>
+            <td>⭐⭐⭐⭐</td>
+            <td>Good practical sessions.</td>
+        </tr>
+
+        <tr>
+            <td>Arun</td>
+            <td>Data Structures</td>
+            <td>⭐⭐⭐⭐⭐</td>
+            <td>Very useful and easy to understand.</td>
+        </tr>
+    </table>
+
+</div>
+
+<footer>
+    <p>© 2026 Student Feedback Management System</p>
+</footer>
+
+</body>
+</html>
+

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feedback Management System</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: white;
+        }
+
+        .box {
+            width: 500px;
+            margin: 40px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        input, select, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 80px;
+        }
+
+        button {
+            background: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .feedback {
+            background: #eee;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .delete {
+            background: red;
+            width: auto;
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h1>Feedback Management System</h1>
+
+    <form id="form">
+        <input type="text" id="name" placeholder="Customer Name" required>
+
+        <select id="rating" required>
+            <option value="">Select Rating</option>
+            <option>5 - Excellent</option>
+            <option>4 - Very Good</option>
+            <option>3 - Good</option>
+            <option>2 - Average</option>
+            <option>1 - Poor</option>
+        </select>
+
+        <textarea id="feedback" placeholder="Enter your feedback" required></textarea>
+
+        <button type="submit">Submit Feedback</button>
+    </form>
+
+    <h2>Customer Feedback</h2>
+    <div id="list"></div>
+</div>
+
+<script>
+    let form = document.getElementById("form");
+    let list = document.getElementById("list");
+
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        let name = document.getElementById("name").value;
+        let rating = document.getElementById("rating").value;
+        let feedback = document.getElementById("feedback").value;
+
+        let div = document.createElement("div");
+        div.className = "feedback";
+
+        div.innerHTML = `
+            <b>Name:</b> ${name}<br>
+            <b>Rating:</b> ${rating}<br>
+            <b>Feedback:</b> ${feedback}
+            <button class="delete" onclick="removeFeedback(this)">
+                Delete
+            </button>
+        `;
+
+        list.appendChild(div);
+        form.reset();
+    });
+
+    function removeFeedback(button) {
+        button.parentElement.remove();
+    }
+</script>
+
+</body>
+</html>
+

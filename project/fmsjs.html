@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feedback Management System</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f2f5f9;
+            margin: 0;
+        }
+
+        header {
+            background: #2563eb;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        .container {
+            width: 85%;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+        }
+
+        h2 {
+            color: #2563eb;
+            border-bottom: 2px solid #2563eb;
+            padding-bottom: 8px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 18px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .rating input {
+            width: auto;
+            margin: 5px;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        .clear-btn {
+            background: #dc2626;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background: #2563eb;
+            color: white;
+        }
+
+        .summary {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .box {
+            background: #e8f0ff;
+            padding: 15px;
+            width: 30%;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .message {
+            color: green;
+            font-weight: bold;
+        }
+
+        .clear-section {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        footer {
+            background: #2563eb;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Student Feedback Management System</h1>
+    <p>Submit and manage student feedback</p>
+</header>
+
+<div class="container">
+
+    <h2>Student Feedback Form</h2>
+
+    <form id="feedbackForm">
+
+        <label>Student Name</label>
+        <input type="text" id="name"
+               placeholder="Enter your name" required>
+
+        <label>Student ID</label>
+        <input type="text" id="studentId"
+               placeholder="Enter student ID" required>
+
+        <label>Email</label>
+        <input type="email" id="email"
+               placeholder="Enter email" required>
+
+        <label>Course</label>
+        <select id="course">
+            <option>Object Oriented Programming</option>
+            <option>Operating Systems</option>
+            <option>Data Structures</option>
+            <option>Web Development</option>
+            <option>Embedded Systems</option>
+        </select>
+
+        <label>Faculty Name</label>
+        <input type="text" id="faculty"
+               placeholder="Enter faculty name">
+
+        <label>Rating</label>
+
+        <div class="rating">
+            <input type="radio" name="rating" value="1"> ⭐
+            <input type="radio" name="rating" value="2"> ⭐⭐
+            <input type="radio" name="rating" value="3"> ⭐⭐⭐
+            <input type="radio" name="rating" value="4"> ⭐⭐⭐⭐
+            <input type="radio" name="rating" value="5"> ⭐⭐⭐⭐⭐
+        </div>
+
+        <label>Feedback</label>
+        <textarea id="feedback"
+                  rows="5"
+                  placeholder="Write your feedback..."
+                  required></textarea>
+
+        <button type="submit">Submit Feedback</button>
+        <button type="reset">Clear Form</button>
+
+    </form>
+
+    <p id="message" class="message"></p>
+
+
+    <h2>Feedback Summary</h2>
+
+    <div class="summary">
+
+        <div class="box">
+            <h3 id="total">0</h3>
+            <p>Total Feedbacks</p>
+        </div>
+
+        <div class="box">
+            <h3 id="average">0 ⭐</h3>
+            <p>Average Rating</p>
+        </div>
+
+        <div class="box">
+            <h3 id="positive">0</h3>
+            <p>Positive Feedbacks</p>
+        </div>
+
+    </div>
+
+
+    <h2>Submitted Feedbacks</h2>
+
+    <table id="feedbackTable">
+
+        <tr>
+            <th>Name</th>
+            <th>Student ID</th>
+            <th>Course</th>
+            <th>Faculty</th>
+            <th>Rating</th>
+            <th>Feedback</th>
+        </tr>
+
+    </table>
+
+
+    <!-- CLEAR ALL PREVIOUS FEEDBACKS -->
+
+    <div class="clear-section">
+
+        <button class="clear-btn"
+                onclick="clearAllFeedbacks()">
+            🗑 Clear All Feedbacks
+        </button>
+
+    </div>
+
+</div>
+
+
+<footer>
+    <p>© 2026 Student Feedback Management System</p>
+</footer>
+
+
+<script>
+
+    // Load previously submitted feedbacks
+    let feedbacks =
+        JSON.parse(localStorage.getItem("feedbacks")) || [];
+
+
+    // Display feedbacks when page opens
+    displayFeedbacks();
+
+
+    // Submit feedback
+    document.getElementById("feedbackForm")
+        .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        let name =
+            document.getElementById("name").value;
+
+        let studentId =
+            document.getElementById("studentId").value;
+
+        let course =
+            document.getElementById("course").value;
+
+        let faculty =
+            document.getElementById("faculty").value;
+
+        let feedback =
+            document.getElementById("feedback").value;
+
+        let rating =
+            document.querySelector(
+                'input[name="rating"]:checked'
+            );
+
+
+        if (!rating) {
+            alert("Please select a rating!");
+            return;
+        }
+
+
+        // Create feedback object
+        let newFeedback = {
+
+            name: name,
+
+            studentId: studentId,
+
+            course: course,
+
+            faculty: faculty,
+
+            rating: parseInt(rating.value),
+
+            feedback: feedback
+        };
+
+
+        // Add feedback
+        feedbacks.push(newFeedback);
+
+
+        // Save feedback permanently in browser
+        localStorage.setItem(
+            "feedbacks",
+            JSON.stringify(feedbacks)
+        );
+
+
+        // Display updated data
+        displayFeedbacks();
+
+
+        // Success message
+        document.getElementById("message").innerText =
+            "Feedback submitted successfully!";
+
+
+        // Clear form
+        document.getElementById("feedbackForm").reset();
+
+    });
+

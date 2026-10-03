@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Result Management</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f2f2f2;
+        }
+        .box {
+            width: 80%;
+            margin: 30px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+        }
+        button {
+            background: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background: #ddd;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <h2>Student Result Management System</h2>
+    <input id="name" placeholder="Student Name">
+    <input id="roll" placeholder="Roll No"><br>
+    <input id="m1" type="number" placeholder="Java">
+    <input id="m2" type="number" placeholder="OS">
+    <input id="m3" type="number" placeholder="Web">
+    <input id="m4" type="number" placeholder="IoT">
+    <input id="m5" type="number" placeholder="Python">
+    <br>
+    <button onclick="result()">Calculate Result</button>
+    <button onclick="clearData()">Clear</button>
+    <table id="table">
+        <tr>
+            <th>Name</th>
+            <th>Roll</th>
+            <th>Total</th>
+            <th>Percentage</th>
+            <th>Grade</th>
+            <th>Result</th>
+        </tr>
+    </table>
+</div>
+<script>
+function result() {
+    let name = document.getElementById("name").value;
+    let roll = document.getElementById("roll").value;
+
+    let marks = [
+        +document.getElementById("m1").value,
+        +document.getElementById("m2").value,
+        +document.getElementById("m3").value,
+        +document.getElementById("m4").value,
+        +document.getElementById("m5").value
+    ];
+    let total = marks.reduce((a, b) => a + b, 0);
+    let percentage = total / 5;
+    let pass = marks.every(m => m >= 35);
+    let status = pass ? "PASS" : "FAIL";
+    let grade;
+    if (!pass)
+        grade = "F";
+    else if (percentage >= 90)
+        grade = "A+";
+    else if (percentage >= 80)
+        grade = "A";
+    else if (percentage >= 70)
+        grade = "B";
+    else if (percentage >= 60)
+        grade = "C";
+    else if (percentage >= 50)
+        grade = "D";
+    else
+        grade = "F";
+    document.getElementById("table").innerHTML += `
+        <tr>
+            <td>${name}</td>
+            <td>${roll}</td>
+            <td>${total}/500</td>
+            <td>${percentage.toFixed(2)}%</td>
+            <td>${grade}</td>
+            <td>${status}</td>
+        </tr>
+    `;
+}
+function clearData() {
+    document.querySelectorAll("input").forEach(x => x.value = "");
+}
+</script>
+</body>
+</html>

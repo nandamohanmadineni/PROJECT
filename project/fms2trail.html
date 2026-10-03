@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Feedback Management System</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f8;
+            color: #222;
+        }
+
+        header {
+            background: #1e3a8a;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        header h1 {
+            margin-bottom: 8px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 25px auto;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #ccc;
+        }
+
+        .card h3 {
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        .box {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #ccc;
+        }
+
+        .box h2 {
+            margin-bottom: 20px;
+            color: #1e3a8a;
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        input,
+        select,
+        textarea,
+        button {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        textarea {
+            grid-column: span 2;
+            height: 100px;
+            resize: none;
+        }
+
+        button {
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #172554;
+        }
+
+        .feedback {
+            border: 1px solid #ddd;
+            padding: 18px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+
+        .feedback h3 {
+            color: #1e3a8a;
+            margin-bottom: 8px;
+        }
+
+        .stars {
+            color: #f59e0b;
+            font-size: 20px;
+            margin: 8px 0;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e3a8a;
+            padding: 5px 10px;
+            border-radius: 15px;
+            margin: 3px;
+            font-size: 13px;
+        }
+
+        .delete {
+            width: auto;
+            background: #dc2626;
+            padding: 8px 15px;
+            margin-top: 12px;
+        }
+
+        .delete:hover {
+            background: #b91c1c;
+        }
+
+        .success {
+            color: green;
+            margin-top: 12px;
+            display: none;
+        }
+
+        @media (max-width: 800px) {
+
+            .dashboard {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            form {
+                grid-template-columns: 1fr;
+            }
+
+            textarea {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <h1> Feedback Management System</h1>
+
+    <p>
+        Student feedback for subjects and faculty
+    </p>
+
+</header>
+
+
+<div class="container">
+
+
+    <!-- Dashboard -->
+
+    <div class="dashboard">
+
+        <div class="card">
+
+            <h3>Total Feedback</h3>
+
+            <p id="total">0</p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Average Rating</h3>
+
+            <p id="average">0</p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Good Ratings</h3>
+
+            <p id="positive">0</p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Subjects</h3>
+
+            <p id="subjects">0</p>
+
+        </div>
+
+    </div>
+
+
+    <!-- Feedback Form -->
+
+    <div class="box">
+
+        <h2>📝 Student Feedback Form</h2>
+
+
+        <form id="feedbackForm">
+
+
+            <input
+                type="text"
+                id="student"
+                placeholder="Student Name"
+                required
+            >
+
+
+            <input
+                type="text"
+                id="roll"
+                placeholder="Roll Number"
+                required
+            >
+
+
+            <select id="year" required>
+
+                <option value="">Select Year</option>
+
+                <option value="I Year">
+                    I Year
+                </option>
+
+                <option value="II Year">
+                    II Year
+                </option>
+
+                <option value="III Year">
+                    III Year
+                </option>
+
+                <option value="IV Year">
+                    IV Year
+                </option>
+
+            </select>
+
+
+            <select id="subject" required>
+
+                <option value="">
+                    Select Subject
+                </option>
+
+                <option value="Data Structures">
+                    Data Structures
+                </option>
+
+                <option value="Operating Systems">
+                    Operating Systems
+                </option>
+
+                <option value="Java Programming">
+                    Java Programming
+                </option>
+
+                <option value="Computer Networks">
+                    Computer Networks
+                </option>
+
+                <option value="Database Management Systems">
+                    Database Management Systems
+                </option>
+
+                <option value="Computer Organization">
+                    Computer Organization
+                </option>
+
+                <option value="Python Programming">
+                    Python Programming
+                </option>
+
+            </select>
+
+
+            <select id="faculty" required>
+
+                <option value="">
+                    Select Faculty
+                </option>
+
+                <option value="Faculty A">
+                    Faculty A
+                </option>
+
+                <option value="Faculty B">
+                    Faculty B
+                </option>
+
+                <option value="Faculty C">
+                    Faculty C
+                </option>
+
+                <option value="Faculty D">
+                    Faculty D
+                </option>
+
+            </select>
+
+
+            <select id="rating" required>
+
+                <option value="">
+                    Teaching Rating
+                </option>
+
+                <option value="5">
+                    ⭐⭐⭐⭐⭐ Excellent
+                </option>
+
+                <option value="4">
+                    ⭐⭐⭐⭐ Good
+                </option>
+
+                <option value="3">
+                    ⭐⭐⭐ Average
+                </option>
+
+                <option value="2">
+                    ⭐⭐ Poor
+                </option>
+
+                <option value="1">
+                    ⭐ Very Poor
+                </option>
+
+            </select>
+
+
+            <select id="category" required>
+
+                <option value="">
+                    Feedback Category
+                </option>
+
+                <option value="Teaching">
+                    Teaching Quality
+                </option>
+
+                <option value="Course Content">
+                    Course Content
+                </option>
+
+                <option value="Assignments">
+                    Assignments
+                </option>
+
+                <option value="Laboratory">
+                    Laboratory
+                </option>
+
+                <option value="Examinations">
+                    Examinations
+                </option>
+
+                <option value="Suggestions">
+                    Suggestions
+                </option>
+
+            </select>
+
+
+            <textarea
+                id="message"
+                placeholder="Enter your feedback or suggestion..."
+                required>
+            </textarea>
+
+
+            <button type="submit">
+                Submit Feedback
+            </button>
+
+        </form>
+
+
+        <p id="success" class="success">
+            ✅ Feedback submitted successfully!
+        </p>
+
+    </div>
+
+
+    <!-- Feedback List -->
+
+    <div class="box">
+
+        <h2>📋 Student Feedback</h2>
+
+
+        <select
+            id="filter"
+            onchange="displayFeedback()">
+
+            <option value="All">
+                All Subjects
+            </option>
+
+            <option value="Data Structures">
+                Data Structures
+            </option>
+
+            <option value="Operating Systems">
+                Operating Systems
+            </option>
+
+            <option value="Java Programming">
+                Java Programming
+            </option>
+
+            <option value="Computer Networks">
+                Computer Networks
+            </option>
+
+            <option value="Database Management Systems">
+                Database Management Systems
+            </option>
+
+            <option value="Computer Organization">
+                Computer Organization
+            </option>
+
+            <option value="Python Programming">
+                Python Programming
+            </option>
+
+        </select>
+
+
+        <br><br>
+
+
+        <div id="feedbackList">
+
+            <p>
+                No feedback submitted yet.
+            </p>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+    let feedbacks = [];
+
+
+    // Submit feedback
+
+    document
+        .getElementById("feedbackForm")
+        .addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+
+            let feedback = {
+
+                student:
+                    document.getElementById("student").value,
+
+                roll:
+                    document.getElementById("roll").value,
+
+                year:
+                    document.getElementById("year").value,
+
+                subject:
+                    document.getElementById("subject").value,
+
+                faculty:
+                    document.getElementById("faculty").value,
+
+                rating:
+                    Number(document.getElementById("rating").value),
+
+                category:
+                    document.getElementById("category").value,
+
+                message:
+                    document.getElementById("message").value
+
+            };
+
+
+            feedbacks.push(feedback);
+
+
+            document
+                .getElementById("feedbackForm")
+                .reset();
+
+
+            document
+                .getElementById("success")
+                .style.display = "block";
+
+
+            setTimeout(function() {
+
+                document
+                    .getElementById("success")
+                    .style.display = "none";
+
+            }, 2000);
+
+
+            updateDashboard();
+
+        });
+
+
+    // Dashboard
+
+    function updateDashboard() {
+
+        let total =
+            feedbacks.length;
+
+
+        let ratingTotal = 0;
+
+        let positive = 0;
+
+        let subjectList = [];
+
+
+        feedbacks.forEach(function(feedback) {
+
+            ratingTotal += feedback.rating;
+
+
+            if (feedback.rating >= 4) {
+
+                positive++;
+
+            }
+
+
+            if (!subjectList.includes(feedback.subject)) {
+
+                subjectList.push(feedback.subject);
+
+            }
+
+        });
+
+
+        let average =
+            total === 0
+                ? 0
+                : (ratingTotal / total).toFixed(1);
+
+
+        document.getElementById("total")
+            .textContent = total;
+
+
+        document.getElementById("average")
+            .textContent = average;
+
+
+        document.getElementById("positive")
+            .textContent = positive;
+
+
+        document.getElementById("subjects")
+            .textContent = subjectList.length;
+
+
+        displayFeedback();
+
+    }
+
+
+    // Display feedback
+
+    function displayFeedback() {
+
+        let list =
+            document.getElementById("feedbackList");
+
+
+        let filter =
+            document.getElementById("filter").value;
+
+
+        list.innerHTML = "";
+
+
+        let filtered =
+            feedbacks.filter(function(feedback) {
+
+                return filter === "All" ||
+                       feedback.subject === filter;
+
+            });
+
+
+        if (filtered.length === 0) {
+
+            list.innerHTML =
+                "<p>No feedback available.</p>";
+
+            return;
+
+        }
+
+
+        filtered.forEach(function(feedback) {
+
+
+            let index =
+                feedbacks.indexOf(feedback);
+
+
+            let stars =
+                "★".repeat(feedback.rating) +
+                "☆".repeat(5 - feedback.rating);
+
+
+            let div =
+                document.createElement("div");
+
+
+            div.className = "feedback";
+
+
+            div.innerHTML = `
+
+                <h3>
+                    ${feedback.subject}
+                </h3>
+
+                <p>
+                    <b>Student:</b>
+                    ${feedback.student}
+                </p>
+
+                <p>
+                    <b>Roll Number:</b>
+                    ${feedback.roll}
+                </p>
+
+                <p>
+                    <b>Year:</b>
+                    ${feedback.year}
+                </p>
+
+                <p>
+                    <b>Faculty:</b>
+                    ${feedback.faculty}
+                </p>
+
+                <div class="stars">
+                    ${stars}
+                </div>
+
+                <span class="tag">
+                    ${feedback.category}
+                </span>
+
+                <p style="margin-top:12px;">
+                    ${feedback.message}
+                </p>
+
+                <button
+                    class="delete"
+                    onclick="deleteFeedback(${index})">
+
+                    Delete
+
+                </button>
+
+            `;
+
+
+            list.appendChild(div);
+
+        });
+
+    }
+
+
+    // Delete feedback
+
+    function deleteFeedback(index) {
+
+        feedbacks.splice(index, 1);
+
+        updateDashboard();
+
+    }
+
+</script>
+
+</body>
+</html>
+

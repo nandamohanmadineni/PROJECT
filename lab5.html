@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ShopEasy</title>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial;text-align:center}
+
+nav{
+  background:#222;color:white;padding:15px;+
+  display:flex;justify-content:space-around
+}
+nav a{color:white;margin:10px;text-decoration:none}
+
+.hero{
+  padding:50px;background:#667eea;color:white
+}
+
+button{
+  padding:12px 25px;border:0;border-radius:20px;
+  animation:pulse 1s infinite
+}
+
+@keyframes pulse{
+  50%{transform:scale(1.1)}
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:20px;padding:20px
+}
+
+.card{
+  padding:25px;background:#eee;border-radius:10px
+}
+
+.card:hover{transform:translateY(-5px)}
+
+@media(max-width:600px){
+  nav{flex-direction:column;gap:10px}
+}
+</style>
+</head>
+<body>
+<nav>
+  <b>ShopEasy</b>
+  <div>
+    <a href="#">Home</a>
+    <a href="#">Products</a>
+    <a href="#">Offers</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>Big Deals!</h1>
+  <p>Best Products at Best Prices</p>
+  <button>Shop Now</button>
+</section>
+
+<h2>Products</h2>
+<div class="products">
+  <div class="card">📱<h3>Mobile</h3>₹20,000</div>
+  <div class="card">💻<h3>Laptop</h3>₹50,000</div>
+  <div class="card">🎧<h3>Headphones</h3>₹2,000</div>
+  <div class="card">⌚<h3>Smart Watch</h3>₹4,000</div>
+</div>
+
+</body>
+</html>
